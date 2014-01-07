@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:loadBundle basename="i18n.application" var="msg" />
+
+<head>
+<title><h:outputText value="#{msg.welcomeTitle}" /></title>
+</head>
+
+<body>
+	<h3>
+		<h:outputText value="#{msg.users.title}" />
+	</h3>
+
+
+	<h:form>
+		<h:dataTable id="users" var="user" 
+					 value="#{indexBacking.users}"
+					 style="width: 100%">
+			
+			<h:column headerText="#{msg.nomeCompleto}"
+                      sortBy="#{usuario.nome}" 
+                      style="width:10%;">
+                    #{user.id}
+                </h:column>
+			<h:column headerText="Active">
+                    <h:outputText value="#{user.active}" />
+                </h:column>
+			<h:column headerText="First Name">
+                    #{user.firstName}
+                </h:column>
+			<h:column headerText="Surname">
+                    #{user.lastName}
+                </h:column>
+			<h:column headerText="Email">
+                    #{user.email}
+                </h:column>
+			<h:column headerText="Login">
+                    #{user.login}
+                </h:column>
+			<h:column headerText="Password">
+                    #{user.password}
+                </h:column>
+			<h:column headerText="Created...">
+				<h:outputText value="#{user.created}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</h:column>
+			<h:column headerText="Last update">			
+				<h:outputText value="#{user.updated}">
+					<f:convertDateTime pattern="yyyy-MM-dd" />
+				</h:outputText>                    
+             </h:column>
+		</h:dataTable>
+	</h:form>
+
+</body>
+</html>
