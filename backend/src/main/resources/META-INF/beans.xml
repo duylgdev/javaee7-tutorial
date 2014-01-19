@@ -2,5 +2,13 @@
 <beans xmlns="http://xmlns.jcp.org/xml/ns/javaee"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
-       bean-discovery-mode="annotated">
+       bean-discovery-mode="all">
+
+    <!-- Specific such as '@Interceptor' + '@Alternative' must be declared over here -->
+    <!-- In order to use them the bean-discovery-mode must be "all" instead of annotated. Other XML will be discared -->
+
+    <interceptors>
+        <class>eu.daxiongmao.tutorial.util.interceptor.impl.LoggingInterceptorImpl</class>
+    </interceptors>
+
 </beans>

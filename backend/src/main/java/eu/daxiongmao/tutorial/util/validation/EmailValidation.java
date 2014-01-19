@@ -1,17 +1,12 @@
-/**
- * 
- */
 package eu.daxiongmao.tutorial.util.validation;
 
+import eu.daxiongmao.tutorial.util.validation.impl.EmailValidationImpl;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
 import javax.validation.Constraint;
-
-import eu.daxiongmao.tutorial.util.validation.impl.EmailValidationImpl;
 
 /**
  * <p>
@@ -37,7 +32,9 @@ public @interface EmailValidation {
 
 	Class[] groups() default {};
 
-	/** Message to raise in case of validation error. */
+	/**
+	 * Message to raise in case of validation error.
+	 */
 	String message();
 
 	Class[] payload() default {};
