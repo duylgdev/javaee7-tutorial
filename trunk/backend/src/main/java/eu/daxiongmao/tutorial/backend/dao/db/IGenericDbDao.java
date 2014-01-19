@@ -2,17 +2,23 @@ package eu.daxiongmao.tutorial.backend.dao.db;
 
 import java.util.List;
 import java.util.Map;
-
 import javax.ejb.Local;
+import javax.transaction.Transactional;
 
 /**
- * Generic database DAO.
+ * Generic database DAO.<br/>
+ * This requires a DB transaction.
+ * <ul>
+ * <li>If none already exists then it open a new one.</li>
+ * <li>If a transaction is provide then it will use that one</li>
+ * </ul>
  * 
  * @param <T> database entity
  * @author Guillaume Diaz
  * @version 1.0 - September 2013
  */
 @Local
+@Transactional(Transactional.TxType.REQUIRED)
 public interface IGenericDbDao<T extends Object> {
 
 	/**
