@@ -1,4 +1,4 @@
-package eu.daxiongmao.tutorial.backend.service.bookstore.qualifier;
+package eu.daxiongmao.tutorial.backend.service.bookstore.util.qualifier;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 import javax.inject.Qualifier;
 
 /**
- * Qualifier to designate the ISSN (8 to 10 digits) book ID generator.
+ * Qualifier to designate the ISBN (13 digits) book ID generator.
  * 
  * @author Guillaume Diaz - Based upon "Beginning Java EE 7" by Antonio Goncalves, aPress 2013.
  * @version 1.0 - January 2014
@@ -15,6 +15,5 @@ import javax.inject.Qualifier;
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE })
-public @interface EightDigits {
-
+public @interface ThirteenDigits {
 }
