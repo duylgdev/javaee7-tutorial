@@ -1,8 +1,10 @@
 package eu.daxiongmao.tutorial.backend.service.bookstore;
 
-import eu.daxiongmao.tutorial.backend.service.bookstore.qualifier.ThirteenDigits;
+import eu.daxiongmao.tutorial.backend.service.bookstore.util.BookNumberGenerator;
+import eu.daxiongmao.tutorial.backend.service.bookstore.util.qualifier.ThirteenDigits;
 import eu.daxiongmao.tutorial.model.bookstore.Book;
 import eu.daxiongmao.tutorial.util.interceptor.LoggingInterceptor;
+
 import javax.inject.Inject;
 
 /**

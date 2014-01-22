@@ -1,4 +1,4 @@
-package eu.daxiongmao.tutorial.backend.service.bookstore;
+package eu.daxiongmao.tutorial.backend.service.bookstore.util;
 
 /**
  * To generate the book ID = either an ISBN or ISSN number.
