@@ -1,15 +1,17 @@
 package eu.daxiongmao.tutorial.util.interceptor.impl;
 
-import eu.daxiongmao.tutorial.util.interceptor.LoggingInterceptor;
-import eu.daxiongmao.tutorial.util.resources.LoggerProducer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.annotation.Priority;
 import javax.inject.Inject;
 import javax.interceptor.AroundConstruct;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
+
+import eu.daxiongmao.tutorial.util.interceptor.LoggingInterceptor;
+import eu.daxiongmao.tutorial.util.resources.LoggerProducer;
 
 /**
  * <p>
@@ -24,6 +26,10 @@ import javax.interceptor.InvocationContext;
  * <strong>IMPORTANT NOTE:</strong><br/>
  * This class is using a generic Logger. Therefore, you must use a Producer to associate the logger to the current class. See {@link LoggerProducer}
  * </p>
+ * <p>
+ * <i>Key note:</i><br/>
+ * Notice the {@link Interceptor} annotation.
+ * </p>
  * 
  * @author Guillaume Diaz - Based upon "Beginning Java EE 7" by Antonio Goncalves, aPress 2013.
  * @version 1.0 - January 2014
@@ -34,15 +40,20 @@ import javax.interceptor.InvocationContext;
 public class LoggingInterceptorImpl {
 
 	/**
+	 * Log level to use for this interceptor.
+	 */
+	private static final Level LOG_LEVEL = Level.FINER;
+
+	/**
 	 * Target class logger.
 	 */
 	@Inject
 	private Logger logger;
 
-	/**
-	 * Log level to use for this interceptor. {@link Level#FINER}.
-	 */
-	private static final Level LOG_LEVEL = Level.FINER;
+	/** Default constructor. */
+	public LoggingInterceptorImpl() {
+
+	}
 
 	/**
 	 * To intercept Class constructor calls.<br/>
@@ -87,6 +98,8 @@ public class LoggingInterceptorImpl {
 	 */
 	@AroundInvoke
 	public Object logMethod(final InvocationContext ic) throws Exception {
+		logger.log(LOG_LEVEL, ">>>> Entering method");
+
 		// Alternative to the previous method = default entering / exiting methods
 		// Entering is using Level.FINER
 		logger.entering(ic.getTarget().toString(), ic.getMethod().getName());
@@ -98,10 +111,6 @@ public class LoggingInterceptorImpl {
 			String logMsg = "- execution time (ms): %s";
 			logger.exiting(ic.getTarget().toString(), ic.getMethod().getName(), String.format(logMsg, executionTime));
 		}
-	}
-
-	public LoggingInterceptorImpl() {
-
 	}
 
 }
