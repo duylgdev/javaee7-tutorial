@@ -1,13 +1,13 @@
 package eu.daxiongmao.tutorial.backend.service.bookstore.util.impl;
 
-import eu.daxiongmao.tutorial.backend.service.bookstore.util.BookNumberGenerator;
-import eu.daxiongmao.tutorial.backend.service.bookstore.util.qualifier.ThirteenDigits;
-import eu.daxiongmao.tutorial.util.interceptor.LoggingInterceptor;
-
 import java.util.Random;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
+
+import eu.daxiongmao.tutorial.backend.service.bookstore.util.BookNumberGenerator;
+import eu.daxiongmao.tutorial.backend.service.bookstore.util.qualifier.ThirteenDigits;
+import eu.daxiongmao.tutorial.util.interceptor.LoggingInterceptor;
 
 /**
  * To generate the ISBN (13 digits number) book ID.
@@ -27,7 +27,7 @@ public class IsbnGenerator implements BookNumberGenerator {
 		// The group is a 1 to 5 digit number. 0 or 1 for English-speaking countries; 2 for French-speaking countries; ..
 		String group = "2-";
 		String publisher = "75125-";
-		String isbn = group + publisher + Math.abs(new Random().nextInt());
+		String isbn = "ISBN - " + group + publisher + Math.abs(new Random().nextInt());
 		logger.info("Generated ISBN: " + isbn);
 		return isbn;
 	}
