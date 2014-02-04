@@ -1,12 +1,12 @@
 package eu.daxiongmao.tutorial.backend.service.bookstore.util.impl;
 
-import eu.daxiongmao.tutorial.backend.service.bookstore.util.BookNumberGenerator;
-import eu.daxiongmao.tutorial.backend.service.bookstore.util.qualifier.EightDigits;
-
 import java.util.Random;
 import java.util.logging.Logger;
 
 import javax.inject.Inject;
+
+import eu.daxiongmao.tutorial.backend.service.bookstore.util.BookNumberGenerator;
+import eu.daxiongmao.tutorial.backend.service.bookstore.util.qualifier.EightDigits;
 
 /**
  * To generate the ISSN (8 to 10 digits number) book ID.
@@ -22,7 +22,7 @@ public class IssnGenerator implements BookNumberGenerator {
 
 	@Override
 	public String generateNumber() {
-		String issn = "8-" + Math.abs(new Random().nextInt());
+		String issn = "ISSN - 8 -" + Math.abs(new Random().nextInt());
 		logger.info("Generated ISSN: " + issn);
 		return issn;
 	}

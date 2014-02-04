@@ -24,7 +24,7 @@ import eu.daxiongmao.tutorial.model.bookstore.Book;
  * @version 1.0 - January 2014
  * 
  */
-public final class BookstoreIT {
+public final class BookstoreMockIT {
 
 	/**
 	 * Test to create a new book using a mock ID generator.
