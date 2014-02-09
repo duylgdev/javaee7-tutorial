@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:loadBundle basename="i18n.application" var="msg" />
+
+	<head>
+		<title><h:outputText value="#{msg.groups_title}" /></title>
+	</head>
+
+	<body>
+		<h1>
+			<h:outputText value="#{msg.groups_view}" />
+		</h1>
+	
+		<h:form>
+			<h:dataTable id="groups" var="group" value="#{groupView.groups}">
+	
+				<h:column>
+					<f:facet name="header">#{msg.db_Id}</f:facet>
+	                    #{group.id}
+	                </h:column>
+				<h:column>
+					<f:facet name="header">#{msg.db_active}</f:facet>
+	                    #{group.active}
+	                </h:column>	
+	                
+				<h:column sortBy="#{group.name}">
+					<f:facet name="header">#{msg.common_name}</f:facet>
+	                    #{group.name}
+	                </h:column>
+				<h:column sortBy="#{group.description}">
+					<f:facet name="header">#{msg.common_description}</f:facet>
+	                    #{group.description}
+	                </h:column>
+	                
+				<h:column>
+					<f:facet name="header">#{msg.db_creation_date}</f:facet>
+					<h:outputText value="#{group.created}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">#{msg.db_update_date}</f:facet>
+					<h:outputText value="#{group.updated}">
+						<f:convertDateTime pattern="yyyy-MM-dd" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+			        <f:facet name="header">#{msg.action_edit}</f:facet>
+			        <h:link outcome="/pages/group/groupEdit.xhtml" value="#{msg.action_edit}">
+			        	<f:param name="groupId" value="#{group.id}"/>
+			        </h:link>
+				</h:column>
+			</h:dataTable>
+			
+			<h:button outcome="/pages/group/groupEdit.xhtml" value="#{msg.group_add_new}" />
+			
+		</h:form>
+	
+</body>
+</html>

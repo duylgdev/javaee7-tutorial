@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<!-- JSF generic stuff -->
+	<f:loadBundle basename="i18n.application" var="msg" />
+	
+	<!-- JSF page specifics. Process argument [= page metadata] -->
+	<f:metadata>
+		<f:viewParam name="permissionId" value="#{permissionEdit.obj}" converter="#{permissionConverter}" />
+	</f:metadata>
+
+	<head>
+		<title><h:outputText value="#{msg.permissions_title}" /></title>
+	</head>
+
+	<body>
+		<h1>
+			<h:outputText value="#{msg.permission_edit}" />
+		</h1>
+	
+		<!-- Messages (error, success) will appear over here. -->
+		<h:messages />
+	
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="#{msg.db_Id}" rendered="#{!empty permissionEdit.obj.id}" />
+				<h:outputLabel value="#{permissionEdit.obj.id}" rendered="#{!empty permissionEdit.obj.id}" />
+	
+				<h:outputLabel value="#{msg.db_active}" rendered="#{!empty permissionEdit.obj.id}" />
+				<h:selectBooleanCheckbox value="#{permissionEdit.obj.active}" rendered="#{!empty permissionEdit.obj.id}" />
+	
+				<h:outputLabel value="#{msg.common_name}" for="permissionName" />
+				<h:inputText id="permissionName" value="#{permissionEdit.obj.name}" />
+	
+				<h:outputLabel value="#{msg.common_description}" for="permissionDescription" />
+				<h:inputText id="permissionDescription" value="#{permissionEdit.obj.description}" />
+	
+				<h:commandButton action="#{permissionEdit.save}" value="#{msg.button_submit}" />
+				<h:button outcome="/pages/permission/permissionsView.xhtml" value="#{msg.button_cancel}" />
+	
+			</h:panelGrid>
+		</h:form>
+	
+	</body>
+</html>

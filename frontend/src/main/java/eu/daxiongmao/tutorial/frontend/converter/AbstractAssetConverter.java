@@ -1,15 +1,13 @@
-package eu.daxiongmao.tutorial.frontend.converter.asset;
+package eu.daxiongmao.tutorial.frontend.converter;
 
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
 import org.apache.commons.lang3.StringUtils;
 
-import eu.daxiongmao.tutorial.backend.dao.db.asset.IUserDbDao;
-import eu.daxiongmao.tutorial.model.asset.User;
+import eu.daxiongmao.tutorial.backend.dao.db.IGenericDbDao;
+import eu.daxiongmao.tutorial.model.Asset;
 
 /**
  * Utility to convert an entity to a JSF object and vice-versa.
@@ -23,19 +21,14 @@ import eu.daxiongmao.tutorial.model.asset.User;
  * @version 1.0 - February 2014
  * @since v1.0
  */
-@ManagedBean
-public class UserConverter implements Converter {
-
-	/** Backend service. */
-	@EJB
-	private IUserDbDao userDao;
+public abstract class AbstractAssetConverter<T extends Asset> implements Converter {
 
 	@Override
 	public Object getAsObject(final FacesContext context, final UIComponent component, final String value) {
-		User target = null;
+		T target = null;
 		if (value != null && StringUtils.isNoneBlank(value)) {
 			long searchId = Long.parseLong(value);
-			target = userDao.find(searchId);
+			target = getDao().find(searchId);
 		}
 		return target;
 	}
@@ -45,12 +38,15 @@ public class UserConverter implements Converter {
 		String target = StringUtils.EMPTY;
 		if (value != null) {
 			// Extract object ID as reference
-			Long sourceId = ((User) value).getId();
+			Long sourceId = ((T) value).getId();
 			if (sourceId != null) {
 				target = sourceId.toString();
 			}
 		}
 		return target;
 	}
+
+	/** @return the backend service that will perform save / edit operation. */
+	protected abstract IGenericDbDao<T> getDao();
 
 }

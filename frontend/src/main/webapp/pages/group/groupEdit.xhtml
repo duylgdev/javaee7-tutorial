@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<!-- JSF generic stuff -->
+	<f:loadBundle basename="i18n.application" var="msg" />
+	
+	<!-- JSF page specifics. Process argument [= page metadata] -->
+	<f:metadata>
+		<f:viewParam name="groupId" value="#{groupEdit.obj}" converter="#{groupConverter}" />
+	</f:metadata>
+
+	<head>
+		<title><h:outputText value="#{msg.groups_title}" /></title>
+	</head>
+
+	<body>
+		<h1>
+			<h:outputText value="#{msg.group_edit}" />
+		</h1>
+	
+		<!-- Messages (error, success) will appear over here. -->
+		<h:messages />
+	
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="#{msg.db_Id}" rendered="#{!empty groupEdit.obj.id}" />
+				<h:outputLabel value="#{groupEdit.obj.id}" rendered="#{!empty groupEdit.obj.id}" />
+	
+				<h:outputLabel value="#{msg.db_active}" rendered="#{!empty groupEdit.obj.id}" />
+				<h:selectBooleanCheckbox value="#{groupEdit.obj.active}" rendered="#{!empty groupEdit.obj.id}" />
+	
+				<h:outputLabel value="#{msg.common_name}" for="groupName" />
+				<h:inputText id="groupName" value="#{groupEdit.obj.name}" />
+	
+				<h:outputLabel value="#{msg.common_description}" for="groupDescription" />
+				<h:inputText id="groupDescription" value="#{groupEdit.obj.description}" />
+	
+				<h:commandButton action="#{groupEdit.save}" value="#{msg.button_submit}" />
+				<h:button outcome="/pages/group/groupsView.xhtml" value="#{msg.button_cancel}" />
+	
+			</h:panelGrid>
+		</h:form>
+	
+	</body>
+</html>
