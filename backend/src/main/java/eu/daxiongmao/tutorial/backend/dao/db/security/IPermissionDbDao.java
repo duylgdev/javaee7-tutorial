@@ -2,7 +2,7 @@ package eu.daxiongmao.tutorial.backend.dao.db.security;
 
 import javax.ejb.Local;
 
-import eu.daxiongmao.tutorial.backend.dao.db.IGenericDbDao;
+import eu.daxiongmao.tutorial.backend.dao.db.IAssetDbDao;
 import eu.daxiongmao.tutorial.model.security.Permission;
 
 /**
@@ -13,6 +13,6 @@ import eu.daxiongmao.tutorial.model.security.Permission;
  * 
  */
 @Local
-public interface IPermissionDbDao extends IGenericDbDao<Permission> {
+public interface IPermissionDbDao extends IAssetDbDao<Permission> {
 
 }
