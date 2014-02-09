@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<!-- JSF generic stuff -->
+<f:loadBundle basename="i18n.application" var="msg" />
+
+<!-- JSF page specifics. Process argument [= page metadata] and load default value if required -->
+<f:metadata>
+	<f:viewParam name="userId" value="#{userEdit.currentUser}" converter="#{userConverter}" />
+</f:metadata>
+
+
+<head>
+<title><h:outputText value="#{msg.users_title}" /></title>
+</head>
+
+<body>
+	<h1>
+		<h:outputText value="#{msg.user_edit}" />
+	</h1>
+
+	<!-- Messages (error, success) will appear over here. -->
+	<h:messages />
+
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="#{msg.db_Id}" rendered="#{!empty userEdit.currentUser.id}" />
+			<h:outputLabel value="#{userEdit.currentUser.id}" rendered="#{!empty userEdit.currentUser.id}" />
+
+			<h:outputLabel value="#{msg.db_active}" rendered="#{!empty userEdit.currentUser.id}" />
+			<h:selectBooleanCheckbox value="#{userEdit.currentUser.active}" rendered="#{!empty userEdit.currentUser.id}" />
+
+			<h:outputLabel value="#{msg.user_firstName}" for="firstName" />
+			<h:inputText id="firstName" value="#{userEdit.currentUser.firstName}" />
+
+			<h:outputLabel value="#{msg.user_lastName}" for="lastName" />
+			<h:inputText id="lastName" value="#{userEdit.currentUser.lastName}" />
+
+			<h:outputLabel value="#{msg.common_email}" for="email" />
+			<h:inputText id="email" value="#{userEdit.currentUser.email}" />
+
+			<h:outputLabel value="#{msg.user_login}" for="login" />
+			<h:inputText id="login" value="#{userEdit.currentUser.login}" />
+
+			<h:outputLabel value="#{msg.user_password}" for="password" />
+			<h:inputText id="password" value="#{userEdit.password}" />
+
+			<h:outputLabel value="#{msg.user_password}" for="passwordConfirmation" />
+			<h:inputText id="passwordConfirmation" value="#{userEdit.passwordConfirmation}" />
+
+			<h:commandButton action="#{userEdit.saveUser}" value="#{msg.button_submit}" />
+			<h:button outcome="/pages/user/usersView.xhtml" value="#{msg.button_cancel}" />
+
+		</h:panelGrid>
+	</h:form>
+
+</body>
+</html>
