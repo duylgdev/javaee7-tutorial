@@ -73,7 +73,7 @@ public class User extends Asset {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NotNull
 	@XmlElement(required = false)
-	private Integer id;
+	private Long id;
 
 	/** Last name (= surname). */
 	@Column(name = "last_name", nullable = true, length = EntityFieldSize.VARCHAR_MEDIUM_TEXT_200, unique = false)
@@ -142,7 +142,7 @@ public class User extends Asset {
 	/**
 	 * @return {@link #id}
 	 */
-	public final Integer getId() {
+	public final Long getId() {
 		return id;
 	}
 
@@ -202,7 +202,7 @@ public class User extends Asset {
 	/**
 	 * @param id the {@link #id} to set
 	 */
-	public final void setId(final Integer id) {
+	public final void setId(final Long id) {
 		this.id = id;
 	}
 

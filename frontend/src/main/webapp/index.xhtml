@@ -20,43 +20,11 @@
 		<h:outputText value="#{msg.welcomeMessage}" />
 	</p>
 
+	<!-- Messages (error, success) will appear over here. -->
+	<h:messages />
 
-	USERs:
 	<h:form>
-		<h:dataTable id="users" var="user" value="#{indexBacking.users}"
-			style="width: 100%">
-			<h:column headerText="ID">
-                    #{user.id}
-                </h:column>
-			<h:column headerText="Active">
-                    #{user.active}
-                </h:column>
-			<h:column headerText="First Name">
-                    #{user.firstName}
-                </h:column>
-			<h:column headerText="Surname">
-                    #{user.lastName}
-                </h:column>
-			<h:column headerText="Email">
-                    #{user.email}
-                </h:column>
-			<h:column headerText="Login">
-                    #{user.login}
-                </h:column>
-			<h:column headerText="Password">
-                    #{user.password}
-                </h:column>
-			<h:column headerText="Created...">
-				<h:outputText value="#{user.created}">
-					<f:convertDateTime pattern="dd/MM/yyyy" />
-				</h:outputText>
-			</h:column>
-			<h:column headerText="Last update">			
-				<h:outputText value="#{user.updated}">
-					<f:convertDateTime pattern="yyyy-MM-dd" />
-				</h:outputText>                    
-             </h:column>
-		</h:dataTable>
+			<h:button outcome="/pages/user/usersView.xhtml" value="#{msg.users_title}" />
 	</h:form>
 
 </body>
