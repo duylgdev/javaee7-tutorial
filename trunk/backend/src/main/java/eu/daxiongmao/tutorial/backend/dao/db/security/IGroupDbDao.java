@@ -2,7 +2,7 @@ package eu.daxiongmao.tutorial.backend.dao.db.security;
 
 import javax.ejb.Local;
 
-import eu.daxiongmao.tutorial.backend.dao.db.IGenericDbDao;
+import eu.daxiongmao.tutorial.backend.dao.db.IAssetDbDao;
 import eu.daxiongmao.tutorial.model.security.Group;
 
 /**
@@ -13,6 +13,6 @@ import eu.daxiongmao.tutorial.model.security.Group;
  * 
  */
 @Local
-public interface IGroupDbDao extends IGenericDbDao<Group> {
+public interface IGroupDbDao extends IAssetDbDao<Group> {
 
 }

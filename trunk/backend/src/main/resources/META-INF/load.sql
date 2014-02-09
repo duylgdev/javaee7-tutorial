@@ -5,12 +5,11 @@ INSERT INTO `tutorial`.`users` (`id`, `active`, `created`, `updated`, `first_nam
 INSERT INTO `tutorial`.`users` (`id`, `active`, `created`, `updated`, `first_name`, `last_name`, `login`, `email`, `password`) VALUES ('5', '1', '1948-10-28 01:00:00','1948-10-28 01:00:00', 'Philip', 'Mortimer', 'mortimer', 'philip.mortimer@comics.be', 'test');
 INSERT INTO `tutorial`.`users` (`id`, `active`, `created`, `updated`, `first_name`, `login`, `email`, `password`) VALUES ('6', '1', '1929-01-01 01:00:00','1929-01-01 01:00:00', 'Tintin', 'tintin', 'tintin@comics.be', 'test');
 
-INSERT INTO `tutorial`.`groups` (`id`, `name`, `description`) VALUES ('1', 'Simple user', 'Application default user');
-INSERT INTO `tutorial`.`groups` (`id`, `name`, `description`) VALUES ('2', 'Administrator', 'Application\'s administrator');
+INSERT INTO `tutorial`.`groups` (`id`, `active`, `created`, `updated`, `name`, `description`) VALUES ('1', '1', '2014-01-01 01:00:00','2014-01-01 01:00:00', 'Simple user', 'Application default user');
+INSERT INTO `tutorial`.`groups` (`id`, `active`, `created`, `updated`, `name`, `description`) VALUES ('2', '1', '2014-01-01 01:00:00','2014-01-01 01:00:00', 'Administrator', 'Application\'s administrator');
 
-INSERT INTO `tutorial`.`permissions` (`id`, `name`, `description`) VALUES ('1', 'Administration', 'Application\'s administration');
-INSERT INTO `tutorial`.`permissions` (`id`, `name`, `description`) VALUES ('2', 'User profile', 'This allow the current user to change its profile settings: address, email, password, ... ');
-
+INSERT INTO `tutorial`.`permissions` (`id`, `active`, `created`, `updated`, `name`, `description`) VALUES ('1', '1', '2014-01-01 01:00:00','2014-01-01 01:00:00', 'Administration', 'Application\'s administration');
+INSERT INTO `tutorial`.`permissions` (`id`, `active`, `created`, `updated`, `name`, `description`) VALUES ('2', '1', '2014-01-01 01:00:00','2014-01-01 01:00:00', 'User profile', 'This allow the current user to change its profile settings: address, email, password, ... ');
 
 INSERT INTO `tutorial`.`users_groups` (`user_id`, `group_id`) VALUES ('1', '1');
 INSERT INTO `tutorial`.`users_groups` (`user_id`, `group_id`) VALUES ('2', '1');

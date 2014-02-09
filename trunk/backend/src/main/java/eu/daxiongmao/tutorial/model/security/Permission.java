@@ -1,6 +1,5 @@
 package eu.daxiongmao.tutorial.model.security;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,9 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -20,6 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang3.StringUtils;
 
+import eu.daxiongmao.tutorial.model.Asset;
 import eu.daxiongmao.tutorial.util.constant.EntityFieldSize;
 
 /**
@@ -31,7 +28,7 @@ import eu.daxiongmao.tutorial.util.constant.EntityFieldSize;
 @XmlRootElement
 @Entity
 @Table(name = "permissions")
-public class Permission implements Serializable {
+public class Permission extends Asset {
 
 	/** Object UID. */
 	private static final long serialVersionUID = 4386255988141414124L;
@@ -54,14 +51,6 @@ public class Permission implements Serializable {
 	@ManyToMany(mappedBy = "permissions", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	@XmlElement(required = false)
 	private List<Group> groups;
-
-	/** Object ID in database. */
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull
-	@XmlElement(required = false)
-	private Integer id;
 
 	/** Name of the current element. */
 	@XmlElement(required = true)
@@ -106,13 +95,6 @@ public class Permission implements Serializable {
 	}
 
 	/**
-	 * @return {@link #id}
-	 */
-	public final Integer getId() {
-		return id;
-	}
-
-	/**
 	 * @return {@link #$ bare_field_name}
 	 */
 	public final String getName() {
@@ -145,13 +127,6 @@ public class Permission implements Serializable {
 	}
 
 	/**
-	 * @param id the {@link #id} to set
-	 */
-	public final void setId(final Integer id) {
-		this.id = id;
-	}
-
-	/**
 	 * @param name {@link #name} to set
 	 */
 	public final void setName(final String name) {
@@ -160,10 +135,10 @@ public class Permission implements Serializable {
 
 	@Override
 	public final String toString() {
-		StringBuilder log = new StringBuilder();
-		if (id != null && id > 0) {
-			log.append("ID: ").append(id).append(" | ");
-		}
+		StringBuilder log = new StringBuilder("Permission # ");
+		// Asset properties
+		log.append(super.toString(true));
+
 		log.append("Name: ").append(name);
 		if (!StringUtils.isBlank(description)) {
 			log.append(" | ").append(description);

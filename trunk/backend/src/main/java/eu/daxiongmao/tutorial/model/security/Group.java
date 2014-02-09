@@ -1,6 +1,5 @@
 package eu.daxiongmao.tutorial.model.security;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,9 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -22,7 +18,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang3.StringUtils;
 
-import eu.daxiongmao.tutorial.model.asset.User;
+import eu.daxiongmao.tutorial.model.Asset;
+import eu.daxiongmao.tutorial.model.common.User;
 import eu.daxiongmao.tutorial.util.constant.EntityFieldSize;
 
 /**
@@ -34,7 +31,7 @@ import eu.daxiongmao.tutorial.util.constant.EntityFieldSize;
 @XmlRootElement
 @Entity
 @Table(name = "groups")
-public class Group implements Serializable {
+public class Group extends Asset {
 
 	/** Object UID. */
 	private static final long serialVersionUID = -5901729586989791650L;
@@ -43,14 +40,6 @@ public class Group implements Serializable {
 	@XmlElement(required = false)
 	@Column(name = "description", length = EntityFieldSize.VARCHAR_BIG_TEXT_500, nullable = true, unique = false)
 	private String description;
-
-	/** Object ID in database. */
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull
-	@XmlElement(required = false)
-	private Integer id;
 
 	/** Name of the current element. */
 	@XmlElement(required = true)
@@ -115,13 +104,6 @@ public class Group implements Serializable {
 	}
 
 	/**
-	 * @return {@link #id}
-	 */
-	public final Integer getId() {
-		return id;
-	}
-
-	/**
 	 * @return {@link #$ bare_field_name}
 	 */
 	public final String getName() {
@@ -165,13 +147,6 @@ public class Group implements Serializable {
 	}
 
 	/**
-	 * @param id the {@link #id} to set
-	 */
-	public final void setId(final Integer id) {
-		this.id = id;
-	}
-
-	/**
 	 * @param name {@link #name} to set
 	 */
 	public final void setName(final String name) {
@@ -198,10 +173,10 @@ public class Group implements Serializable {
 
 	@Override
 	public final String toString() {
-		StringBuilder log = new StringBuilder();
-		if (id != null && id > 0) {
-			log.append("ID: ").append(id).append(" | ");
-		}
+		StringBuilder log = new StringBuilder("Group # ");
+		// Asset properties
+		log.append(super.toString(true));
+
 		log.append("Name: ").append(name);
 		if (!StringUtils.isBlank(description)) {
 			log.append(" | ").append(description);

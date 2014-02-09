@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -66,6 +69,14 @@ public class Asset implements Serializable {
 	@XmlElement(required = false)
 	private Date deleted = null;
 
+	/** Object ID in database. */
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@NotNull
+	@XmlElement(required = false)
+	private Long id;
+
 	/** Represent the last time the object was updated in database. */
 	@Column(name = "updated", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
@@ -111,6 +122,13 @@ public class Asset implements Serializable {
 			return new Date(this.deleted.getTime());
 		}
 		return null;
+	}
+
+	/**
+	 * @return {@link #id}
+	 */
+	public final Long getId() {
+		return id;
 	}
 
 	/**
@@ -175,6 +193,13 @@ public class Asset implements Serializable {
 	}
 
 	/**
+	 * @param id the {@link #id} to set
+	 */
+	public final void setId(final Long id) {
+		this.id = id;
+	}
+
+	/**
 	 * @param updated the {@link #updated} to set
 	 */
 	public final void setUpdated(final Date updated) {
@@ -189,6 +214,9 @@ public class Asset implements Serializable {
 	 */
 	public final String toString(final boolean fullLog) {
 		StringBuilder msg = new StringBuilder();
+		if (id != null && id > 0) {
+			msg.append("ID: ").append(id).append(" | ");
+		}
 		msg.append("is active: ").append(active);
 
 		if (fullLog) {
