@@ -1,4 +1,4 @@
-package eu.daxiongmao.tutorial.model.asset;
+package eu.daxiongmao.tutorial.model.common;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -66,14 +63,6 @@ public class User extends Asset {
 	@JoinTable(name = "users_groups", joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "group_id", referencedColumnName = "id") })
 	@XmlElement(required = false)
 	private List<Group> groups;
-
-	/** Object ID in database. */
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull
-	@XmlElement(required = false)
-	private Long id;
 
 	/** Last name (= surname). */
 	@Column(name = "last_name", nullable = true, length = EntityFieldSize.VARCHAR_MEDIUM_TEXT_200, unique = false)
@@ -140,13 +129,6 @@ public class User extends Asset {
 	}
 
 	/**
-	 * @return {@link #id}
-	 */
-	public final Long getId() {
-		return id;
-	}
-
-	/**
 	 * @return {@link #lastName}
 	 */
 	public final String getLastName() {
@@ -200,13 +182,6 @@ public class User extends Asset {
 	}
 
 	/**
-	 * @param id the {@link #id} to set
-	 */
-	public final void setId(final Long id) {
-		this.id = id;
-	}
-
-	/**
 	 * @param lastName the {@link #lastName} to set
 	 */
 	public final void setLastName(final String lastName) {
@@ -230,12 +205,7 @@ public class User extends Asset {
 	@Override
 	public final String toString() {
 		StringBuilder log = new StringBuilder("User # ");
-
-		if (id != null && id > 0) {
-			log.append("ID: ").append(id).append(" | ");
-		}
-
-		// Display dates
+		// Asset properties
 		log.append(super.toString(true));
 
 		// Extract name

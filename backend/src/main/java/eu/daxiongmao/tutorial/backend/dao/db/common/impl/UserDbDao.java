@@ -1,10 +1,10 @@
-package eu.daxiongmao.tutorial.backend.dao.db.asset.impl;
+package eu.daxiongmao.tutorial.backend.dao.db.common.impl;
 
 import javax.ejb.Stateless;
 
 import eu.daxiongmao.tutorial.backend.dao.db.AbstractAssetDbDao;
-import eu.daxiongmao.tutorial.backend.dao.db.asset.IUserDbDao;
-import eu.daxiongmao.tutorial.model.asset.User;
+import eu.daxiongmao.tutorial.backend.dao.db.common.IUserDbDao;
+import eu.daxiongmao.tutorial.model.common.User;
 
 /**
  * User database DAO.

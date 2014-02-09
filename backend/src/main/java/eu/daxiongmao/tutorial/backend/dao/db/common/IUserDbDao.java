@@ -1,9 +1,9 @@
-package eu.daxiongmao.tutorial.backend.dao.db.asset;
+package eu.daxiongmao.tutorial.backend.dao.db.common;
 
 import javax.ejb.Local;
 
 import eu.daxiongmao.tutorial.backend.dao.db.IAssetDbDao;
-import eu.daxiongmao.tutorial.model.asset.User;
+import eu.daxiongmao.tutorial.model.common.User;
 
 /**
  * USER database dao.
