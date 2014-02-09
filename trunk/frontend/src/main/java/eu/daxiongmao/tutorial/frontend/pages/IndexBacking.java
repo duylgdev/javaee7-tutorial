@@ -6,8 +6,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import eu.daxiongmao.tutorial.backend.dao.db.asset.IUserDbDao;
-import eu.daxiongmao.tutorial.model.asset.User;
+import eu.daxiongmao.tutorial.backend.dao.db.common.IUserDbDao;
+import eu.daxiongmao.tutorial.model.common.User;
 
 @ManagedBean
 @RequestScoped

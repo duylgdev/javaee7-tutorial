@@ -7,9 +7,9 @@
 <!-- JSF generic stuff -->
 <f:loadBundle basename="i18n.application" var="msg" />
 
-<!-- JSF page specifics. Process argument [= page metadata] and load default value if required -->
+<!-- JSF page specifics. Process argument [= page metadata] -->
 <f:metadata>
-	<f:viewParam name="userId" value="#{userEdit.currentUser}" converter="#{userConverter}" />
+	<f:viewParam name="userId" value="#{userEdit.obj}" converter="#{userConverter}" />
 </f:metadata>
 
 
@@ -27,23 +27,23 @@
 
 	<h:form>
 		<h:panelGrid columns="2">
-			<h:outputLabel value="#{msg.db_Id}" rendered="#{!empty userEdit.currentUser.id}" />
-			<h:outputLabel value="#{userEdit.currentUser.id}" rendered="#{!empty userEdit.currentUser.id}" />
+			<h:outputLabel value="#{msg.db_Id}" rendered="#{!empty userEdit.obj.id}" />
+			<h:outputLabel value="#{userEdit.obj.id}" rendered="#{!empty userEdit.obj.id}" />
 
-			<h:outputLabel value="#{msg.db_active}" rendered="#{!empty userEdit.currentUser.id}" />
-			<h:selectBooleanCheckbox value="#{userEdit.currentUser.active}" rendered="#{!empty userEdit.currentUser.id}" />
+			<h:outputLabel value="#{msg.db_active}" rendered="#{!empty userEdit.obj.id}" />
+			<h:selectBooleanCheckbox value="#{userEdit.obj.active}" rendered="#{!empty userEdit.obj.id}" />
 
 			<h:outputLabel value="#{msg.user_firstName}" for="firstName" />
-			<h:inputText id="firstName" value="#{userEdit.currentUser.firstName}" />
+			<h:inputText id="firstName" value="#{userEdit.obj.firstName}" />
 
 			<h:outputLabel value="#{msg.user_lastName}" for="lastName" />
-			<h:inputText id="lastName" value="#{userEdit.currentUser.lastName}" />
+			<h:inputText id="lastName" value="#{userEdit.obj.lastName}" />
 
 			<h:outputLabel value="#{msg.common_email}" for="email" />
-			<h:inputText id="email" value="#{userEdit.currentUser.email}" />
+			<h:inputText id="email" value="#{userEdit.obj.email}" />
 
 			<h:outputLabel value="#{msg.user_login}" for="login" />
-			<h:inputText id="login" value="#{userEdit.currentUser.login}" />
+			<h:inputText id="login" value="#{userEdit.obj.login}" />
 
 			<h:outputLabel value="#{msg.user_password}" for="password" />
 			<h:inputText id="password" value="#{userEdit.password}" />

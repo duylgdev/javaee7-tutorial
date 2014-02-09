@@ -6,8 +6,10 @@ import javax.faces.bean.RequestScoped;
 
 import org.apache.commons.lang3.StringUtils;
 
-import eu.daxiongmao.tutorial.backend.dao.db.asset.IUserDbDao;
-import eu.daxiongmao.tutorial.model.asset.User;
+import eu.daxiongmao.tutorial.backend.dao.db.IGenericDbDao;
+import eu.daxiongmao.tutorial.backend.dao.db.common.IUserDbDao;
+import eu.daxiongmao.tutorial.frontend.pages.AbstractAssetEdit;
+import eu.daxiongmao.tutorial.model.common.User;
 
 /**
  * EDIT / ADD user controller.
@@ -18,10 +20,7 @@ import eu.daxiongmao.tutorial.model.asset.User;
  */
 @ManagedBean
 @RequestScoped
-public class UserEdit {
-
-	/** User to edit. */
-	private User currentUser;
+public class UserEdit extends AbstractAssetEdit<User> {
 
 	/** New password. */
 	private String password;
@@ -33,6 +32,11 @@ public class UserEdit {
 	@EJB
 	private IUserDbDao userDAO;
 
+	/** Default constructor that binds an object. */
+	public UserEdit() {
+		super(User.class);
+	}
+
 	/**
 	 * To check the user password.
 	 * 
@@ -43,26 +47,21 @@ public class UserEdit {
 		if (StringUtils.isNotBlank(password)) {
 			// Check password confirmation, and adjust target
 			if (StringUtils.isNotBlank(passwordConfirmation) && password.equals(passwordConfirmation)) {
-				currentUser.setPassword(password);
+				getObj().setPassword(password);
 				passwordOk = true;
 			}
 		} else {
 			// Password is mandatory for new user
-			if (currentUser.getId() != null) {
+			if (getObj().getId() != null) {
 				passwordOk = true;
 			}
 		}
 		return passwordOk;
 	}
 
-	/**
-	 * @return the {@link #currentUser}
-	 */
-	public User getCurrentUser() {
-		if (currentUser == null) {
-			this.currentUser = new User();
-		}
-		return currentUser;
+	@Override
+	protected IGenericDbDao<User> getDao() {
+		return userDAO;
 	}
 
 	/**
@@ -79,13 +78,9 @@ public class UserEdit {
 		return passwordConfirmation;
 	}
 
-	/**
-	 * Load default value.
-	 */
-	public void preRenderView() {
-		if (currentUser == null) {
-			currentUser = new User();
-		}
+	@Override
+	protected String getSuccessPage() {
+		return "/pages/user/usersView.xhtml?faces-redirect=true";
 	}
 
 	/**
@@ -94,27 +89,13 @@ public class UserEdit {
 	 * @return the database user ID.
 	 */
 	public String saveUser() {
-		// FIXME check password & password confirmation!
+		// Check password & password confirmation!
 		if (!checkPassword()) {
 			System.err.println("OULA !!! :O C*est pas bon !!");
 			return "/pages/user/userEdit.xhtml?faces-redirect=true";
 		}
 
-		if (currentUser.getId() == null) {
-			currentUser = userDAO.save(currentUser);
-		} else {
-			userDAO.update(currentUser);
-		}
-
-		// FIXME adjust return URL
-		return "/pages/user/usersView.xhtml?faces-redirect=true";
-	}
-
-	/**
-	 * @param currentUser the {@link #currentUser} to set
-	 */
-	public void setCurrentUser(final User currentUser) {
-		this.currentUser = currentUser;
+		return super.save();
 	}
 
 	/**
