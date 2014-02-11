@@ -52,14 +52,22 @@
 				</h:column>
 				<h:column>
 			        <f:facet name="header">#{msg.action_edit}</f:facet>
-			        <h:link outcome="/pages/group/groupEdit.xhtml" value="#{msg.action_edit}">
+			        <h:link outcome="/pages/group/groupEdit.xhtml">
+			        	<h:graphicImage library="images/icons" name="edit_16x16.png" alt="#{msg.action_edit}" />
 			        	<f:param name="groupId" value="#{group.id}"/>
 			        </h:link>
 				</h:column>
 			</h:dataTable>
 			
-			<h:button outcome="/pages/group/groupEdit.xhtml" value="#{msg.group_add_new}" />
+			<h:button outcome="/pages/group/groupEdit.xhtml" image="/resources/images/icons/add_16x16.png" title="#{msg.action_create}">
+				<h:outputLabel value="#{msg.group_add_new}"/>
+			</h:button>
+			<br/>
 			
+			<h:button outcome="/index.xhtml" image="/resources/images/icons/home_16x16.png" title="#{msg.action_back_to_home}">
+			</h:button>
+			<br/>
+						
 		</h:form>
 	
 </body>
