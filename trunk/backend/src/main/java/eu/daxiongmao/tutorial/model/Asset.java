@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -49,39 +48,36 @@ public class Asset implements Serializable {
 	 * NB: assets are not "deleted" but disabled in database.<br/>
 	 * By default every new asset is "active"
 	 */
-	@Column(name = "active", nullable = false)
 	@XmlElement(required = true)
+	@Column(name = "active", nullable = false)
 	private boolean active = true;
 
 	/** Date of object 1st registration in database. */
+	@XmlElement(required = false)
 	@Column(name = "created", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	@NotNull
-	@XmlElement(required = false)
 	private Date created = new Date();
 
 	/**
 	 * Tells when the object was disabled (= deleted from user point of view). <br/>
 	 * If null, then the object is still active.
 	 */
+	@XmlElement(required = false)
 	@Column(name = "deleted", nullable = true)
 	@Temporal(TemporalType.TIMESTAMP)
-	@XmlElement(required = false)
 	private Date deleted = null;
 
 	/** Object ID in database. */
+	@XmlElement(required = false)
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull
-	@XmlElement(required = false)
 	private Long id;
 
 	/** Represent the last time the object was updated in database. */
+	@XmlElement(required = false)
 	@Column(name = "updated", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	@NotNull
-	@XmlElement(required = false)
 	private Date updated = new Date();
 
 	@Override
@@ -100,7 +96,6 @@ public class Asset implements Serializable {
 		}
 
 		// Do not take dates into account!
-
 		return true;
 	}
 
@@ -230,6 +225,7 @@ public class Asset implements Serializable {
 			if (this.getDeleted() != null) {
 				msg.append(" | deleted: ").append(sdf.format(getDeleted()));
 			}
+			msg.append(" # ");
 		}
 
 		return msg.toString();

@@ -55,6 +55,7 @@ public abstract class AbstractAssetDbDao<T extends Asset> extends AbstractGeneri
 		newEntity.setUpdated(new Date());
 
 		// Save entity
+		LOGGER.log(Level.FINE, String.format("Attempt to save asset: %s - %s", getEntityClass().getName(), newEntity));
 		getEntityManager().persist(newEntity);
 
 		LOGGER.log(Level.FINE, String.format("Asset %s has been saved.%n%s", getEntityClass().getName(), newEntity));
