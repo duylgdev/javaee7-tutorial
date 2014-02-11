@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -38,14 +37,14 @@ public class User extends Asset {
 	private static final long serialVersionUID = -1897968760585409731L;
 
 	/** Email address. */
-	@Column(name = "email", nullable = true, length = EntityFieldSize.VARCHAR_MEDIUM_TEXT_255, unique = true)
 	@XmlElement(required = false)
 	@EmailValidation(message = "not a valid email")
+	@Column(name = "email", nullable = true, length = EntityFieldSize.VARCHAR_MEDIUM_TEXT_255, unique = true)
 	private String email = null;
 
 	/** First name. */
-	@Column(name = "first_name", nullable = true, length = EntityFieldSize.VARCHAR_MEDIUM_TEXT_200, unique = false)
 	@XmlElement(required = false)
+	@Column(name = "first_name", nullable = true, length = EntityFieldSize.VARCHAR_MEDIUM_TEXT_200, unique = false)
 	private String firstName = null;
 
 	/**
@@ -59,26 +58,25 @@ public class User extends Asset {
 	 * Note that for the [ @ ManyToMany ] all the mapping is done here.
 	 * </p>
 	 */
+	@XmlElement(required = false)
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	@JoinTable(name = "users_groups", joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "group_id", referencedColumnName = "id") })
-	@XmlElement(required = false)
 	private List<Group> groups;
 
 	/** Last name (= surname). */
-	@Column(name = "last_name", nullable = true, length = EntityFieldSize.VARCHAR_MEDIUM_TEXT_200, unique = false)
 	@XmlElement(required = false)
+	@Column(name = "last_name", nullable = true, length = EntityFieldSize.VARCHAR_MEDIUM_TEXT_200, unique = false)
 	private String lastName = null;
 
 	/** Login. */
-	@Column(name = "login", nullable = false, length = EntityFieldSize.VARCHAR_SMALL_SIZE_50, unique = true)
 	@XmlElement(required = true)
 	@Size(min = 1, max = EntityFieldSize.VARCHAR_SMALL_SIZE_50)
-	@NotNull
+	@Column(name = "login", nullable = false, length = EntityFieldSize.VARCHAR_SMALL_SIZE_50, unique = true)
 	private String login;
 
 	/** Password. */
-	@Column(name = "password", nullable = false, length = EntityFieldSize.VARCHAR_SMALL_TEXT_75, unique = false)
 	@XmlElement(required = false)
+	@Column(name = "password", nullable = false, length = EntityFieldSize.VARCHAR_SMALL_TEXT_75, unique = false)
 	private String password;
 
 	@Override

@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -43,9 +42,8 @@ public class Group extends Asset {
 
 	/** Name of the current element. */
 	@XmlElement(required = true)
-	@Column(name = "name", nullable = false, unique = true, length = EntityFieldSize.VARCHAR_SMALL_SIZE_50)
 	@Size(min = 1, max = EntityFieldSize.VARCHAR_SMALL_SIZE_50)
-	@NotNull
+	@Column(name = "name", nullable = false, unique = true, length = EntityFieldSize.VARCHAR_SMALL_SIZE_50)
 	private String name;
 
 	/**
@@ -59,9 +57,9 @@ public class Group extends Asset {
 	 * Note that for the [ @ ManyToMany ] all the mapping is done here.
 	 * </p>
 	 */
+	@XmlElement(required = false)
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	@JoinTable(name = "groups_permissions", joinColumns = { @JoinColumn(name = "group_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "permission_id", referencedColumnName = "id") })
-	@XmlElement(required = false)
 	private List<Permission> permissions;
 
 	/**
@@ -74,8 +72,8 @@ public class Group extends Asset {
 	 * see: <a href="http://en.wikibooks.org/wiki/Java_Persistence/ManyToMany">source</a>
 	 * </p>
 	 */
-	@ManyToMany(mappedBy = "groups", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	@XmlElement(required = false)
+	@ManyToMany(mappedBy = "groups", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
 	private List<User> users;
 
 	@Override
