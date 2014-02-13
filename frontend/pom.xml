@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-    <!-- Project parent -->
-    <parent>
+	<!-- Project parent -->
+	<parent>
+		<groupId>eu.daxiongmao</groupId>
+		<artifactId>tutorial</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<!-- Current project definition -->
 	<groupId>eu.daxiongmao</groupId>
-	<artifactId>tutorial</artifactId>
-	<version>1.0-SNAPSHOT</version>
-	<relativePath>..</relativePath>
-    </parent>
+	<artifactId>tutorial-frontend</artifactId>
+	<packaging>war</packaging>
 
-    <!-- Current project definition -->
-    <groupId>eu.daxiongmao</groupId>
-    <artifactId>tutorial-frontend</artifactId>
-    <packaging>war</packaging>
+	<name>tutorial-frontend</name>
+	<description>This is a demonstration of how to use Java EE 7 # Frontend. These samples can be re-use later in other project.</description>
 
-    <name>tutorial-frontend</name>
-    <description>This is a demonstration of how to use Java EE 7 # Frontend. These samples can be re-use later in other project.</description>
+	<properties>
+	</properties>
 
-    <properties>
-    </properties>
-    
-    <dependencies>
-	<!-- Backend project -->
-	<dependency>
-		<groupId>${project.parent.groupId}</groupId>
-		<artifactId>tutorial-backend</artifactId>
-		<version>${project.parent.version}</version>
-		<!-- You have to specify the type for JavaEE 7 -->
-		<type>ejb</type>
-	</dependency>
-    </dependencies>
+	<dependencies>
+		<!-- Backend project -->
+		<dependency>
+			<groupId>${project.parent.groupId}</groupId>
+			<artifactId>tutorial-backend</artifactId>
+			<version>${project.parent.version}</version>
+			<!-- You have to specify the type for JavaEE 7 -->
+			<type>ejb</type>
+		</dependency>
+	</dependencies>
 
 
-    <build>
-        <plugins>
-	    <!-- WAR plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-        </plugins>        
-    </build>
+	<build>
+		<plugins>
+			<!-- WAR plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
