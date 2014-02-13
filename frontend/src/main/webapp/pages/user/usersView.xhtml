@@ -1,85 +1,97 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <f:loadBundle basename="i18n.application" var="msg" />
 
-	<head>
-		<title><h:outputText value="#{msg.users_title}" /></title>
-	</head>
+<h:head>
+	<title><h:outputText value="#{msg.users_title}" /></title>
+	<h:outputStylesheet name="css/myStyle.css"  />
+</h:head>
 
-	<body>
-		<h1>
-			<h:outputText value="#{msg.users_view}" />
-		</h1>
-	
-		<h:form>
-			<h:dataTable id="users" var="user" value="#{userView.users}"
-				style="width: 100%">
-	
-				<h:column>
-					<f:facet name="header">#{msg.db_Id}</f:facet>
-	                    #{user.id}
-	                </h:column>
-				<h:column>
-					<f:facet name="header">#{msg.db_active}</f:facet>
-	                    #{user.active}
-	                </h:column>	
-				<h:column sortBy="#{user.firstName}">
-					<f:facet name="header">#{msg.user_firstName}</f:facet>
-	                    #{user.firstName}
-	                </h:column>
-				<h:column sortBy="#{user.lastName}">
-					<f:facet name="header">#{msg.user_lastName}</f:facet>
-	                    #{user.lastName}
-	                </h:column>
-				<h:column>
-					<f:facet name="header">#{msg.common_email}</f:facet>
-	                    #{user.email}
-	                </h:column>
-				<h:column>
-					<f:facet name="header">#{msg.user_login}</f:facet>
-	                    #{user.login}
-	                </h:column>
-				<h:column>
-					<f:facet name="header">#{msg.user_password}</f:facet>
-	                    #{user.password}
-	                </h:column>
-				<h:column>
-					<f:facet name="header">#{msg.db_creation_date}</f:facet>
-					<h:outputText value="#{user.created}">
-						<f:convertDateTime pattern="dd/MM/yyyy" />
-					</h:outputText>
-				</h:column>
-				<h:column>
-					<f:facet name="header">#{msg.db_update_date}</f:facet>
-					<h:outputText value="#{user.updated}">
-						<f:convertDateTime pattern="yyyy-MM-dd" />
-					</h:outputText>
-				</h:column>
-				<h:column>
-			        <f:facet name="header">#{msg.action_edit}</f:facet>
-			        <h:link outcome="/pages/user/userEdit.xhtml">
-			        	<h:graphicImage library="images/icons" name="edit_16x16.png" alt="#{msg.action_edit}" />
-			        	<f:param name="userId" value="#{user.id}"/>
-			        </h:link>
-				</h:column>
-			</h:dataTable>
+<h:body>
+	<h1>
+		<h:outputText value="#{msg.users_view}" />
+	</h1>
 
-			<h:button outcome="/pages/user/userEdit.xhtml" image="/resources/images/icons/add_16x16.png" title="#{msg.action_create}">
-				<h:outputLabel value="#{msg.user_add_new}"/>
-			</h:button>
-			<br/>
-			
-			<h:button outcome="/index.xhtml" image="/resources/images/icons/home_16x16.png" title="#{msg.action_back_to_home}">
-			</h:button>
-			<br/>
-			
-		</h:form>
-	
-</body>
+	<h:form>
+		<h:dataTable id="users" var="user" value="#{userView.users}" 
+					 styleClass="crudTable" 
+					 headerClass="crudTableHeader"
+					 rowClasses="crudTableOddRow, crudTableEvenRow" >
+
+			<h:column>
+				<f:facet name="header">#{msg.db_Id}</f:facet>
+				<h:outputLabel value="#{user.id}" />
+			</h:column>
+			<h:column sortBy="#{user.firstName}">
+				<f:facet name="header">#{msg.user_firstName}</f:facet>
+				<h:outputLabel value="#{user.firstName}" styleClass="#{!user.active ? 'disableItem' : 'enableItem'}" />
+			</h:column>
+			<h:column sortBy="#{user.lastName}">
+				<f:facet name="header">#{msg.user_lastName}</f:facet>
+				<h:outputLabel value="#{user.lastName}" styleClass="#{!user.active ? 'disableItem' : 'enableItem'}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.common_email}</f:facet>
+				<h:outputLabel value="#{user.email}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.user_login}</f:facet>
+				<h:outputLabel value="#{user.login}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.user_password}</f:facet>
+				<h:outputLabel value="#{user.password}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.db_creation_date}</f:facet>
+				<h:outputText value="#{user.created}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.db_update_date}</f:facet>
+				<h:outputText value="#{user.updated}">
+					<f:convertDateTime pattern="yyyy-MM-dd" />
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.db_delete_date}</f:facet>
+				<h:outputText value="#{user.deleted}" rendered="#{!user.active}">
+					<f:convertDateTime pattern="yyyy-MM-dd" />
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.action_edit}</f:facet>
+				<h:link outcome="/pages/user/userEdit.xhtml" rendered="#{user.active}">
+					<h:graphicImage library="images/icons" name="edit_16x16.png" alt="#{msg.action_edit}" />
+					<f:param name="userId" value="#{user.id}" />
+				</h:link>
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.action_delete}</f:facet>
+				<h:commandButton action="#{userView.delete(user)}" value="#{msg.action_delete}" image="/resources/images/icons/delete_16x16.png" rendered="#{user.active}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.action_reEnable}</f:facet>
+				<h:commandButton action="#{userView.reEnable(user)}" value="#{msg.action_reEnable}" image="/resources/images/icons/reEnable_16x16.png"
+					rendered="#{!user.active}" />
+			</h:column>
+		</h:dataTable>
+
+		<h:button outcome="/pages/user/userEdit.xhtml" image="/resources/images/icons/add_16x16.png" title="#{msg.action_create}">
+			<h:outputLabel value="#{msg.user_add_new}" />
+		</h:button>
+		<br />
+
+		<h:button outcome="/index.xhtml" image="/resources/images/icons/home_16x16.png" title="#{msg.action_back_to_home}">
+		</h:button>
+		<br />
+
+	</h:form>
+
+</h:body>
 </html>

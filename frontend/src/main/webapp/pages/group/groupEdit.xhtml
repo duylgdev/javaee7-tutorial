@@ -29,9 +29,6 @@
 				<h:outputLabel value="#{msg.db_Id}" rendered="#{!empty groupEdit.obj.id}" />
 				<h:outputLabel value="#{groupEdit.obj.id}" rendered="#{!empty groupEdit.obj.id}" />
 	
-				<h:outputLabel value="#{msg.db_active}" rendered="#{!empty groupEdit.obj.id}" />
-				<h:selectBooleanCheckbox value="#{groupEdit.obj.active}" rendered="#{!empty groupEdit.obj.id}" />
-	
 				<h:outputLabel value="#{msg.common_name}" for="groupName" />
 				<h:inputText id="groupName" value="#{groupEdit.obj.name}" />
 	

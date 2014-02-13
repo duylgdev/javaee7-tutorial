@@ -28,10 +28,29 @@ public class GroupView {
 	private List<Group> groups;
 
 	/**
+	 * To delete a specific item.
+	 * 
+	 * @param target the item to remove
+	 */
+	public void delete(final Group target) {
+		groupDAO.delete(target);
+	}
+
+	/**
 	 * @return list of groups.
 	 */
 	public List<Group> getGroups() {
 		groups = groupDAO.findAll();
 		return groups;
 	}
+
+	/**
+	 * To re-enable a specific item.
+	 * 
+	 * @param target the item to re-enable
+	 */
+	public void reEnable(final Group target) {
+		groupDAO.reEnable(target);
+	}
+
 }

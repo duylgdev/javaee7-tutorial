@@ -29,9 +29,6 @@
 				<h:outputLabel value="#{msg.db_Id}" rendered="#{!empty permissionEdit.obj.id}" />
 				<h:outputLabel value="#{permissionEdit.obj.id}" rendered="#{!empty permissionEdit.obj.id}" />
 	
-				<h:outputLabel value="#{msg.db_active}" rendered="#{!empty permissionEdit.obj.id}" />
-				<h:selectBooleanCheckbox value="#{permissionEdit.obj.active}" rendered="#{!empty permissionEdit.obj.id}" />
-	
 				<h:outputLabel value="#{msg.common_name}" for="permissionName" />
 				<h:inputText id="permissionName" value="#{permissionEdit.obj.name}" />
 	

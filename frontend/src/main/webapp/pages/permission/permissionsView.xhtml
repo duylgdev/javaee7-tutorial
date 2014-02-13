@@ -1,73 +1,86 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <f:loadBundle basename="i18n.application" var="msg" />
 
-	<head>
-		<title><h:outputText value="#{msg.permissions_title}" /></title>
-	</head>
+<h:head>
+	<title><h:outputText value="#{msg.permissions_title}" /></title>
+	<h:outputStylesheet library="css" name="myStyle.css"  />
+</h:head>
 
-	<body>
-		<h1>
-			<h:outputText value="#{msg.permissions_view}" />
-		</h1>
-	
-		<h:form>
-			<h:dataTable id="permissions" var="permission" value="#{permissionView.permissions}">
-	
-				<h:column>
-					<f:facet name="header">#{msg.db_Id}</f:facet>
-	                    #{permission.id}
-	                </h:column>
-				<h:column>
-					<f:facet name="header">#{msg.db_active}</f:facet>
-	                    #{permission.active}
-	                </h:column>	
-	                
-				<h:column sortBy="#{group.name}">
-					<f:facet name="header">#{msg.common_name}</f:facet>
-	                    #{permission.name}
-	                </h:column>
-				<h:column sortBy="#{group.description}">
-					<f:facet name="header">#{msg.common_description}</f:facet>
-	                    #{permission.description}
-	                </h:column>
-	                
-				<h:column>
-					<f:facet name="header">#{msg.db_creation_date}</f:facet>
-					<h:outputText value="#{permission.created}">
-						<f:convertDateTime pattern="dd/MM/yyyy" />
-					</h:outputText>
-				</h:column>
-				<h:column>
-					<f:facet name="header">#{msg.db_update_date}</f:facet>
-					<h:outputText value="#{permission.updated}">
-						<f:convertDateTime pattern="yyyy-MM-dd" />
-					</h:outputText>
-				</h:column>
-				<h:column>
-			        <f:facet name="header">#{msg.action_edit}</f:facet>
-			        <h:link outcome="/pages/permission/permissionEdit.xhtml">
-			        	<h:graphicImage url="/resources/images/icons/edit_16x16.png" alt="#{msg.action_edit}" />
-			        	<f:param name="permissionId" value="#{permission.id}"/>
-			        </h:link>
-				</h:column>
-			</h:dataTable>
-			
-			<h:button outcome="/pages/permission/permissionEdit.xhtml" image="/resources/images/icons/add_16x16.png" title="#{msg.action_create}">
-				<h:outputLabel value="#{msg.permission_add_new}"/>
-			</h:button>
-			<br/>
-			
-			<h:button outcome="/index.xhtml" image="/resources/images/icons/home_16x16.png" title="#{msg.action_back_to_home}">
-			</h:button>
-			<br/>
-		</h:form>
-	
-</body>
+<h:body>
+	<h1>
+		<h:outputText value="#{msg.permissions_view}" />
+	</h1>
+
+	<h:form>
+		<h:dataTable id="permissions" var="permission" value="#{permissionView.permissions}"
+					 styleClass="crudTable" 
+					 headerClass="crudTableHeader"
+					 rowClasses="crudTableOddRow, crudTableEvenRow">
+
+			<h:column>
+				<f:facet name="header">#{msg.db_Id}</f:facet>
+				<h:outputLabel value="#{permission.id}" />
+			</h:column>
+			<h:column sortBy="#{group.name}">
+				<f:facet name="header">#{msg.common_name}</f:facet>
+				<h:outputLabel value="#{permission.name}" styleClass="#{!permission.active ? 'disableItem' : 'enableItem'}" />
+			</h:column>
+			<h:column sortBy="#{group.description}">
+				<f:facet name="header">#{msg.common_description}</f:facet>
+				<h:outputLabel value="#{permission.description}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">#{msg.db_creation_date}</f:facet>
+				<h:outputText value="#{permission.created}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.db_update_date}</f:facet>
+				<h:outputText value="#{permission.updated}">
+					<f:convertDateTime pattern="yyyy-MM-dd" />
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.db_delete_date}</f:facet>
+				<h:outputText value="#{permission.deleted}" rendered="#{!permission.active}">
+					<f:convertDateTime pattern="yyyy-MM-dd" />
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.action_edit}</f:facet>
+				<h:link outcome="/pages/permission/permissionEdit.xhtml" rendered="#{permission.active}">
+					<h:graphicImage url="/resources/images/icons/edit_16x16.png" alt="#{msg.action_edit}" />
+					<f:param name="permissionId" value="#{permission.id}" />
+				</h:link>
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.action_delete}</f:facet>
+				<h:commandButton action="#{permissionView.delete(permission.id)}" value="#{msg.action_delete}" image="/resources/images/icons/delete_16x16.png"
+					rendered="#{permission.active}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.action_reEnable}</f:facet>
+				<h:commandButton action="#{permissionView.reEnable(permission)}" value="#{msg.action_reEnable}" image="/resources/images/icons/reEnable_16x16.png"
+					rendered="#{!permission.active}" />
+			</h:column>
+		</h:dataTable>
+
+		<h:button outcome="/pages/permission/permissionEdit.xhtml" image="/resources/images/icons/add_16x16.png" title="#{msg.action_create}">
+			<h:outputLabel value="#{msg.permission_add_new}" />
+		</h:button>
+		<br />
+
+		<h:button outcome="/index.xhtml" image="/resources/images/icons/home_16x16.png" title="#{msg.action_back_to_home}">
+		</h:button>
+		<br />
+	</h:form>
+
+</h:body>
 </html>

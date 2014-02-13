@@ -28,10 +28,29 @@ public class PermissionView {
 	private List<Permission> permissions;
 
 	/**
+	 * To delete a specific item.
+	 * 
+	 * @param id the item ID to remove
+	 */
+	public void delete(final long id) {
+		Permission target = permissionDAO.find(id);
+		permissionDAO.delete(target);
+	}
+
+	/**
 	 * @return list of users.
 	 */
 	public List<Permission> getPermissions() {
 		permissions = permissionDAO.findAll();
 		return permissions;
+	}
+
+	/**
+	 * To re-enable a specific item.
+	 * 
+	 * @param target the item to re-enable
+	 */
+	public void reEnable(final Permission target) {
+		permissionDAO.reEnable(target);
 	}
 }
