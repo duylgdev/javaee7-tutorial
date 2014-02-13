@@ -28,6 +28,13 @@ public interface IAssetDbDao<T extends Asset> extends IGenericDbDao<T> {
 	void delete(T entity);
 
 	/**
+	 * To re-enable a previously deleted database entry &lt;T&gt;.
+	 * 
+	 * @param entity the entity to re-enable
+	 */
+	void reEnable(T entity);
+
+	/**
 	 * To save a new entry &lt;T&gt; in database.<br/>
 	 * This will set the creation + update date to the current instant.<br/>
 	 * <i>Reminder</i>: the asset is "active" by default.
