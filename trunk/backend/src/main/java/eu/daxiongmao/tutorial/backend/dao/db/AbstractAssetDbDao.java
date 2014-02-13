@@ -45,6 +45,25 @@ public abstract class AbstractAssetDbDao<T extends Asset> extends AbstractGeneri
 	}
 
 	@Override
+	public void reEnable(final T entity) {
+		if (entity == null) {
+			throw new IllegalArgumentException("Unable to re-enable a NULL object.");
+		}
+		// if already active: nothing to do :)
+		if (!entity.isActive()) {
+			// set flags
+			entity.setActive(true);
+			entity.setDeteled(null);
+
+			// Disable entity
+			update(entity);
+
+			LOGGER.log(Level.FINE, String.format("Asset %s has been re-enable.%n%s", getEntityClass().getName(), entity));
+		}
+
+	}
+
+	@Override
 	public T save(final T newEntity) {
 		if (newEntity == null) {
 			throw new IllegalArgumentException("Unable to create a NULL object.");
