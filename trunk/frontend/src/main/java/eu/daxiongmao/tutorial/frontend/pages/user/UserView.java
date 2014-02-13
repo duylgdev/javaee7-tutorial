@@ -28,10 +28,28 @@ public class UserView {
 	private List<User> users;
 
 	/**
+	 * To delete a specific item.
+	 * 
+	 * @param target the item to remove
+	 */
+	public void delete(final User target) {
+		userDAO.delete(target);
+	}
+
+	/**
 	 * @return list of users.
 	 */
 	public List<User> getUsers() {
 		users = userDAO.findAll();
 		return users;
+	}
+
+	/**
+	 * To re-enable a specific item.
+	 * 
+	 * @param target the item to re-enable
+	 */
+	public void reEnable(final User target) {
+		userDAO.reEnable(target);
 	}
 }

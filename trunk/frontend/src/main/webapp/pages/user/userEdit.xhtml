@@ -30,9 +30,6 @@
 			<h:outputLabel value="#{msg.db_Id}" rendered="#{!empty userEdit.obj.id}" />
 			<h:outputLabel value="#{userEdit.obj.id}" rendered="#{!empty userEdit.obj.id}" />
 
-			<h:outputLabel value="#{msg.db_active}" rendered="#{!empty userEdit.obj.id}" />
-			<h:selectBooleanCheckbox value="#{userEdit.obj.active}" rendered="#{!empty userEdit.obj.id}" />
-
 			<h:outputLabel value="#{msg.user_firstName}" for="firstName" />
 			<h:inputText id="firstName" value="#{userEdit.obj.firstName}" />
 

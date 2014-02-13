@@ -1,0 +1,35 @@
+.crudTable{   
+   border-collapse:collapse;
+   border:1px solid #000000;
+}
+
+.crudTableHeader{
+   text-align:center;
+   background:none repeat scroll 0 0 #C2E0FF;
+   border-bottom:1px solid #000000;
+   border-left:1px solid #555555;
+   border-right:1px solid #555555;    
+   padding:2px;
+}
+
+.crudTableOddRow{
+   text-align:center;
+   background:none repeat scroll 0 0 #FFFFFFF;	
+   border-left:1px thin #777777;
+   border-right:1px thin #777777;   
+}
+
+.crudTableEvenRow{
+   text-align:center;
+   background:none repeat scroll 0 0 #F0F0F6;
+   border-left:1px thin #777777;
+   border-right:1px thin #777777;    
+}
+
+.disableItem {
+	color: #990000;
+}
+
+.enableItem {
+	color: #003300;
+}
