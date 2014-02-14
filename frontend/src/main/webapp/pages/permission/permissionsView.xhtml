@@ -62,7 +62,11 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">#{msg.action_delete}</f:facet>
-				<h:commandButton action="#{permissionView.delete(permission.id)}" value="#{msg.action_delete}" image="/resources/images/icons/delete_16x16.png"
+				<h:commandButton action="#{permissionView.delete(permission.id)}" value="#{msg.action_delete}" image="/resources/images/icons/trash_16x16.png" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.action_disable}</f:facet>
+				<h:commandButton action="#{permissionView.disable(permission)}" value="#{msg.action_disable}" image="/resources/images/icons/disable_16x16.png"
 					rendered="#{permission.active}" />
 			</h:column>
 			<h:column>

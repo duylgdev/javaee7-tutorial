@@ -47,6 +47,14 @@
 				<h:outputLabel value="#{user.password}" />
 			</h:column>
 			<h:column>
+				<f:facet name="header">#{msg.user_groups}</f:facet>
+				<ul style="text-align: left">
+					<ui:repeat value="#{user.groups}" var="groupItem">
+	    				<li><h:outputLabel value="#{groupItem.name}" /></li>
+					</ui:repeat>
+				</ul>
+			</h:column>
+			<h:column>
 				<f:facet name="header">#{msg.db_creation_date}</f:facet>
 				<h:outputText value="#{user.created}">
 					<f:convertDateTime pattern="dd/MM/yyyy" />
@@ -73,7 +81,12 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">#{msg.action_delete}</f:facet>
-				<h:commandButton action="#{userView.delete(user)}" value="#{msg.action_delete}" image="/resources/images/icons/delete_16x16.png" rendered="#{user.active}" />
+				<h:commandButton action="#{userView.delete(user)}" value="#{msg.action_delete}" image="/resources/images/icons/trash_16x16.png" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.action_disable}</f:facet>
+				<h:commandButton action="#{userView.disable(user)}" value="#{msg.action_disable}" image="/resources/images/icons/disable_16x16.png"
+					rendered="#{user.active}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">#{msg.action_reEnable}</f:facet>

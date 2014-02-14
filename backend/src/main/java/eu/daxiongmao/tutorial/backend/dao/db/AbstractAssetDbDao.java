@@ -29,7 +29,7 @@ public abstract class AbstractAssetDbDao<T extends Asset> extends AbstractGeneri
 	}
 
 	@Override
-	public void delete(final T entity) {
+	public void disable(final T entity) {
 		if (entity == null) {
 			throw new IllegalArgumentException("Unable to delete a NULL object.");
 		}

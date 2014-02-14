@@ -22,6 +22,10 @@
 					 headerClass="crudTableHeader"
 					 rowClasses="crudTableOddRow, crudTableEvenRow">
 
+			<h:column selectionMode="multiple">
+				<h:selectBooleanCheckbox value="#{group.id}" />
+			</h:column>
+
 			<h:column>
 				<f:facet name="header">#{msg.db_Id}</f:facet>
 				<h:outputLabel value="#{group.id}" />
@@ -33,6 +37,14 @@
 			<h:column sortBy="#{group.description}">
 				<f:facet name="header">#{msg.common_description}</f:facet>
 				<h:outputLabel value="#{group.description}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.group_permission}</f:facet>
+				<ul style="text-align: left">
+					<ui:repeat value="#{group.permissions}" var="permissionItem">
+	    				<li><h:outputLabel value="#{permissionItem.name}" /></li>
+					</ui:repeat>
+				</ul>
 			</h:column>
 			<h:column>
 				<f:facet name="header">#{msg.db_creation_date}</f:facet>
@@ -61,7 +73,11 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">#{msg.action_delete}</f:facet>
-				<h:commandButton action="#{groupView.delete(group)}" value="#{msg.action_delete}" image="/resources/images/icons/delete_16x16.png"
+				<h:commandButton action="#{groupView.delete(group)}" value="#{msg.action_delete}" image="/resources/images/icons/trash_16x16.png" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">#{msg.action_disable}</f:facet>
+				<h:commandButton action="#{groupView.disable(group)}" value="#{msg.action_disable}" image="/resources/images/icons/disable_16x16.png"
 					rendered="#{group.active}" />
 			</h:column>
 			<h:column>
