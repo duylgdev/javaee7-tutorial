@@ -30,8 +30,7 @@ public interface IGenericDbDao<T extends Object> {
 	int count();
 
 	/**
-	 * To delete a database entry &lt;T&gt;.<br/>
-	 * In fact, the value will simply be "not active" anymore.
+	 * To delete a database entry &lt;T&gt;.
 	 * 
 	 * @param entity the entity to delete
 	 */

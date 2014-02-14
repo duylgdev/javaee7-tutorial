@@ -24,8 +24,7 @@ public interface IAssetDbDao<T extends Asset> extends IGenericDbDao<T> {
 	 * 
 	 * @param entity the entity to delete
 	 */
-	@Override
-	void delete(T entity);
+	void disable(T entity);
 
 	/**
 	 * To re-enable a previously deleted database entry &lt;T&gt;.

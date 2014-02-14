@@ -57,8 +57,9 @@ public abstract class AbstractGenericDbDao<T extends Object> implements IGeneric
 			throw new IllegalArgumentException("Unable to delete a NULL object.");
 		}
 
-		// To remove the row from database
-		em.remove(entity);
+		// To remove the row from database [you first need to merge it to avoid "detached"]
+		T targetEntity = em.merge(entity);
+		em.remove(targetEntity);
 
 		LOGGER.log(Level.FINE, String.format("Object deleted. Class: '%s' | Element: %s", this.entityClass.getName(), entity));
 	}

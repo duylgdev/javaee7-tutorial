@@ -37,6 +37,15 @@ public class UserView {
 	}
 
 	/**
+	 * To disable a specific item.
+	 * 
+	 * @param target the item to disable
+	 */
+	public void disable(final User target) {
+		userDAO.disable(target);
+	}
+
+	/**
 	 * @return list of users.
 	 */
 	public List<User> getUsers() {

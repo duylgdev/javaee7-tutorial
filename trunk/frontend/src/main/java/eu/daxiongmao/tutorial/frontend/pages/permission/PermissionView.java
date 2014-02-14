@@ -38,6 +38,15 @@ public class PermissionView {
 	}
 
 	/**
+	 * To disable a specific item.
+	 * 
+	 * @param target the item to disable
+	 */
+	public void disable(final Permission target) {
+		permissionDAO.disable(target);
+	}
+
+	/**
 	 * @return list of users.
 	 */
 	public List<Permission> getPermissions() {

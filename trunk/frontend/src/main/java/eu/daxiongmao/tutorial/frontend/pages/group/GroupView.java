@@ -37,6 +37,15 @@ public class GroupView {
 	}
 
 	/**
+	 * To disable a specific item.
+	 * 
+	 * @param target the item to disable
+	 */
+	public void disable(final Group target) {
+		groupDAO.disable(target);
+	}
+
+	/**
 	 * @return list of groups.
 	 */
 	public List<Group> getGroups() {

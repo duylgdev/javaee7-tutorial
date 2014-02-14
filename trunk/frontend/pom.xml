@@ -18,6 +18,17 @@
 	<name>tutorial-frontend</name>
 	<description>This is a demonstration of how to use Java EE 7 # Frontend. These samples can be re-use later in other project.</description>
 
+	<!-- Primefaces repo -->
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
+
 	<properties>
 	</properties>
 
@@ -29,6 +40,13 @@
 			<version>${project.parent.version}</version>
 			<!-- You have to specify the type for JavaEE 7 -->
 			<type>ejb</type>
+		</dependency>
+
+		<!-- Primefaces -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>4.0</version>
 		</dependency>
 	</dependencies>
 
